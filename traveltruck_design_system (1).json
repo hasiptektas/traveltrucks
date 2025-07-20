@@ -1,0 +1,292 @@
+{
+  "designSystem": {
+    "name": "TravelTrucks Catalog Page Design System",
+    "version": "1.0",
+    "category": "travel_rental_marketplace",
+    "designPhilosophy": {
+      "primary": "Clean marketplace functionality",
+      "secondary": "Filter-focused product discovery",
+      "approach": "Sidebar-content layout with card-based listings"
+    }
+  },
+  "layout": {
+    "structure": "sidebar_content_layout",
+    "composition": {
+      "header": {
+        "type": "minimal_navigation",
+        "position": "top_static",
+        "background": "white_clean",
+        "alignment": "space_between"
+      },
+      "sidebar": {
+        "type": "fixed_left_sidebar",
+        "width": "280px_approximate",
+        "background": "light_gray_section",
+        "content": "filters_and_search"
+      },
+      "main_content": {
+        "type": "product_grid_listing",
+        "layout": "vertical_card_stack",
+        "spacing": "consistent_gaps"
+      },
+      "contentHierarchy": [
+        "location_selector",
+        "filter_categories",
+        "product_cards",
+        "load_more_pagination"
+      ]
+    }
+  },
+  "colorPalette": {
+    "primary": {
+      "background": "#FFFFFF",
+      "sidebar_background": "#F8F9FA"
+    },
+    "accent": {
+      "cta_button": "#E74C3C",
+      "cta_hover": "#C0392B",
+      "active_filter": "#E74C3C"
+    },
+    "text": {
+      "primary": "#2C3E50",
+      "secondary": "#6C757D",
+      "navigation": "#2C3E50",
+      "price": "#2C3E50"
+    },
+    "neutral": {
+      "light": "#FFFFFF",
+      "medium": "#E9ECEF",
+      "border": "#DEE2E6",
+      "icons": "#6C757D"
+    },
+    "interactive": {
+      "rating_background": "#4A69BD",
+      "heart_icon": "#6C757D",
+      "heart_active": "#E74C3C"
+    }
+  },
+  "typography": {
+    "hierarchy": {
+      "h1": {
+        "purpose": "hero_headline",
+        "characteristics": "bold, impact-focused, large scale",
+        "weight": "700-900",
+        "style": "sans-serif modern"
+      },
+      "body": {
+        "purpose": "supporting_text",
+        "characteristics": "clean, readable, medium weight",
+        "weight": "400-500",
+        "style": "sans-serif"
+      },
+      "navigation": {
+        "purpose": "menu_items",
+        "characteristics": "minimal, clean, medium weight",
+        "weight": "500",
+        "style": "sans-serif"
+      }
+    },
+    "scale": {
+      "hero_title": "clamp(2.5rem, 5vw, 4rem)",
+      "body_text": "clamp(1rem, 2vw, 1.25rem)",
+      "navigation": "1rem"
+    }
+  },
+  "components": {
+    "navigation": {
+      "type": "minimal_horizontal",
+      "style": "clean_white_background",
+      "items": "text_links",
+      "branding": "text_logo_left",
+      "behavior": "static_header"
+    },
+    "sidebar_filters": {
+      "location_selector": {
+        "style": "input_with_icon",
+        "background": "white_rounded",
+        "icon": "location_pin",
+        "placeholder": "city_country"
+      },
+      "filter_categories": {
+        "style": "grouped_sections",
+        "headers": "bold_category_labels",
+        "items": "icon_grid_layout",
+        "selection": "single_or_multi_select"
+      },
+      "filter_buttons": {
+        "style": "icon_text_combination",
+        "layout": "grid_3_columns",
+        "active_state": "colored_background",
+        "inactive_state": "gray_background"
+      }
+    },
+    "product_cards": {
+      "layout": "horizontal_card_layout",
+      "image": {
+        "position": "left_side",
+        "aspect_ratio": "4:3",
+        "size": "medium_thumbnail",
+        "corners": "rounded"
+      },
+      "content": {
+        "position": "right_side",
+        "hierarchy": [
+          "product_title",
+          "rating_reviews",
+          "location",
+          "description_snippet",
+          "amenity_icons",
+          "price_cta"
+        ]
+      },
+      "actions": {
+        "primary_cta": "show_more_button",
+        "secondary": "favorite_heart_icon"
+      }
+    },
+    "buttons": {
+      "primary_cta": {
+        "style": "rounded_rectangle",
+        "background": "solid_accent_color",
+        "text": "white_contrast",
+        "padding": "medium_compact",
+        "corners": "rounded"
+      },
+      "filter_button": {
+        "style": "rounded_square",
+        "background": "light_gray_default",
+        "active_background": "accent_color",
+        "icon": "centered",
+        "text": "below_icon"
+      },
+      "search_button": {
+        "style": "rounded_rectangle",
+        "background": "accent_color",
+        "text": "white",
+        "width": "full_width"
+      }
+    }
+  },
+  "visualStyle": {
+    "imageStyle": {
+      "primary": "product_photography",
+      "treatment": "clean_bright_lighting",
+      "composition": "vehicle_focused_shots",
+      "mood": "practical_aspirational"
+    },
+    "effects": {
+      "gradients": "none",
+      "shadows": "subtle_card_shadows",
+      "borders": "light_gray_dividers",
+      "transparency": "none"
+    },
+    "spacing": {
+      "philosophy": "clean_organized_spacing",
+      "vertical": "consistent_card_gaps",
+      "horizontal": "sidebar_content_separation",
+      "content": "comfortable_reading_space"
+    },
+    "iconography": {
+      "style": "outline_minimal",
+      "size": "small_medium",
+      "color": "muted_gray",
+      "usage": "amenity_indicators"
+    }
+  },
+  "interactionDesign": {
+    "hover_states": {
+      "buttons": "darken_background_transition",
+      "links": "subtle_opacity_change",
+      "duration": "300ms_smooth"
+    },
+    "transitions": {
+      "standard": "ease_in_out_300ms",
+      "buttons": "background_color_transition",
+      "navigation": "opacity_fade"
+    }
+  },
+  "responsiveApproach": {
+    "breakpoints": {
+      "mobile": "max-width: 768px",
+      "tablet": "769px - 1024px",
+      "desktop": "min-width: 1025px"
+    },
+    "adaptations": {
+      "mobile": {
+        "hero_text": "reduce_font_scale",
+        "layout": "stack_vertically",
+        "spacing": "tighter_padding"
+      },
+      "tablet": {
+        "hero_text": "medium_scale",
+        "layout": "maintain_left_alignment"
+      }
+    }
+  },
+  "contentStrategy": {
+    "messaging_hierarchy": [
+      "vehicle_name_title",
+      "rating_social_proof",
+      "location_context",
+      "feature_highlights",
+      "price_action"
+    ],
+    "tone": "informative_practical_friendly",
+    "copy_length": "concise_scannable",
+    "data_display": {
+      "ratings": "numeric_with_visual_indicator",
+      "pricing": "prominent_right_aligned",
+      "features": "icon_based_quick_scan",
+      "location": "city_country_format"
+    }
+  },
+  "functionalElements": {
+    "filters": {
+      "categories": [
+        "vehicle_equipment",
+        "vehicle_type",
+        "location"
+      ],
+      "interaction": "multi_select_toggle",
+      "visual_feedback": "active_state_styling"
+    },
+    "search": {
+      "type": "location_based",
+      "input_style": "icon_enhanced",
+      "placeholder": "descriptive_example"
+    },
+    "pagination": {
+      "type": "load_more_button",
+      "position": "bottom_center",
+      "style": "minimal_text_link"
+    }
+  },
+  "technicalSpecs": {
+    "css_framework_compatibility": [
+      "tailwind_css",
+      "bootstrap",
+      "custom_css"
+    ],
+    "image_requirements": {
+      "hero_image": "high_resolution_landscape",
+      "aspect_ratio": "16:9_or_wider",
+      "format": "webp_with_jpg_fallback",
+      "optimization": "compressed_for_web"
+    }
+  },
+  "implementationGuidelines": {
+    "priority_elements": [
+      "full_viewport_hero",
+      "overlay_navigation",
+      "prominent_cta_button",
+      "high_contrast_typography"
+    ],
+    "key_principles": [
+      "sidebar_filter_functionality",
+      "card_based_product_display",
+      "clean_marketplace_aesthetics",
+      "icon_based_feature_indication",
+      "mobile_responsive_layout"
+    ]
+  }
+}

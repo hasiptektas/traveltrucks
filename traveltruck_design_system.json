@@ -1,0 +1,193 @@
+{
+  "designSystem": {
+    "name": "TravelTrucks Landing Page Design System",
+    "version": "1.0",
+    "category": "travel_outdoor_lifestyle",
+    "designPhilosophy": {
+      "primary": "Adventure-focused minimalism",
+      "secondary": "Premium outdoor lifestyle branding",
+      "approach": "Hero-driven storytelling with clean typography"
+    }
+  },
+  "layout": {
+    "structure": "hero_dominant_layout",
+    "composition": {
+      "header": {
+        "type": "minimal_navigation",
+        "position": "top_overlay",
+        "background": "transparent_overlay",
+        "alignment": "space_between"
+      },
+      "hero": {
+        "type": "full_viewport_hero",
+        "contentPlacement": "left_aligned",
+        "imageStyle": "full_bleed_background",
+        "overlayStyle": "subtle_dark_gradient"
+      },
+      "contentHierarchy": [
+        "brand_logo",
+        "hero_headline",
+        "supporting_text",
+        "primary_cta"
+      ]
+    }
+  },
+  "colorPalette": {
+    "primary": {
+      "background": "#000000",
+      "overlay": "rgba(0, 0, 0, 0.4)"
+    },
+    "accent": {
+      "cta_button": "#E74C3C",
+      "cta_hover": "#C0392B"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#F8F9FA",
+      "navigation": "#FFFFFF"
+    },
+    "neutral": {
+      "light": "#FFFFFF",
+      "medium": "#6C757D"
+    }
+  },
+  "typography": {
+    "hierarchy": {
+      "h1": {
+        "purpose": "hero_headline",
+        "characteristics": "bold, impact-focused, large scale",
+        "weight": "700-900",
+        "style": "sans-serif modern"
+      },
+      "body": {
+        "purpose": "supporting_text",
+        "characteristics": "clean, readable, medium weight",
+        "weight": "400-500",
+        "style": "sans-serif"
+      },
+      "navigation": {
+        "purpose": "menu_items",
+        "characteristics": "minimal, clean, medium weight",
+        "weight": "500",
+        "style": "sans-serif"
+      }
+    },
+    "scale": {
+      "hero_title": "clamp(2.5rem, 5vw, 4rem)",
+      "body_text": "clamp(1rem, 2vw, 1.25rem)",
+      "navigation": "1rem"
+    }
+  },
+  "components": {
+    "navigation": {
+      "type": "minimal_horizontal",
+      "style": "transparent_overlay",
+      "items": "text_links",
+      "branding": "text_logo_left",
+      "behavior": "sticky_transparent"
+    },
+    "buttons": {
+      "primary_cta": {
+        "style": "rounded_rectangle",
+        "background": "solid_color_accent",
+        "text": "white_contrast",
+        "padding": "generous",
+        "hover": "darken_background",
+        "corners": "moderately_rounded"
+      }
+    },
+    "hero_section": {
+      "image_treatment": "full_bleed_background",
+      "overlay": "dark_gradient_overlay",
+      "content_container": "left_aligned_content_block",
+      "text_treatment": "high_contrast_white",
+      "spacing": "generous_vertical_padding"
+    }
+  },
+  "visualStyle": {
+    "imageStyle": {
+      "primary": "lifestyle_photography",
+      "treatment": "warm_natural_lighting",
+      "composition": "environmental_context",
+      "mood": "aspirational_outdoor_adventure"
+    },
+    "effects": {
+      "gradients": "subtle_dark_overlays",
+      "shadows": "minimal_clean",
+      "borders": "none_or_minimal",
+      "transparency": "overlay_backgrounds"
+    },
+    "spacing": {
+      "philosophy": "generous_whitespace",
+      "vertical": "large_section_padding",
+      "horizontal": "container_constrained",
+      "content": "breathing_room_focused"
+    }
+  },
+  "interactionDesign": {
+    "hover_states": {
+      "buttons": "darken_background_transition",
+      "links": "subtle_opacity_change",
+      "duration": "300ms_smooth"
+    },
+    "transitions": {
+      "standard": "ease_in_out_300ms",
+      "buttons": "background_color_transition",
+      "navigation": "opacity_fade"
+    }
+  },
+  "responsiveApproach": {
+    "breakpoints": {
+      "mobile": "max-width: 768px",
+      "tablet": "769px - 1024px",
+      "desktop": "min-width: 1025px"
+    },
+    "adaptations": {
+      "mobile": {
+        "hero_text": "reduce_font_scale",
+        "layout": "stack_vertically",
+        "spacing": "tighter_padding"
+      },
+      "tablet": {
+        "hero_text": "medium_scale",
+        "layout": "maintain_left_alignment"
+      }
+    }
+  },
+  "contentStrategy": {
+    "messaging_hierarchy": [
+      "emotional_hook_headline",
+      "value_proposition_subtitle",
+      "clear_action_cta"
+    ],
+    "tone": "aspirational_confident_direct",
+    "copy_length": "concise_impactful"
+  },
+  "technicalSpecs": {
+    "css_framework_compatibility": [
+      "tailwind_css",
+      "bootstrap",
+      "custom_css"
+    ],
+    "image_requirements": {
+      "hero_image": "high_resolution_landscape",
+      "aspect_ratio": "16:9_or_wider",
+      "format": "webp_with_jpg_fallback",
+      "optimization": "compressed_for_web"
+    }
+  },
+  "implementationGuidelines": {
+    "priority_elements": [
+      "full_viewport_hero",
+      "overlay_navigation",
+      "prominent_cta_button",
+      "high_contrast_typography"
+    ],
+    "key_principles": [
+      "mobile_first_responsive",
+      "performance_optimized_images",
+      "accessibility_compliant_contrast",
+      "semantic_html_structure"
+    ]
+  }
+}
