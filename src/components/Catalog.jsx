@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../features/filters/filtersSlice';
+import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { toast } from 'react-toastify';
 import { MapPinIcon, HeartIcon, StarIcon, Cog6ToothIcon, FireIcon, TvIcon, WrenchScrewdriverIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 
@@ -21,6 +23,16 @@ const vehicleTypes = [
 export default function Catalog({ products = [], visibleCount, setVisibleCount, totalCount }) {
   const dispatch = useDispatch();
   const filters = useSelector(state => state.filters);
+  const favorites = useSelector(state => state.favorites);
+
+  const handleFavorite = (id) => {
+    dispatch(toggleFavorite(id));
+    if (favorites.includes(id)) {
+      toast.info('Favorilerden çıkarıldı');
+    } else {
+      toast.success('Favorilere eklendi');
+    }
+  };
 
   return (
     <div className="flex min-h-screen pt-24 bg-[#F8F9FA]">
@@ -94,8 +106,8 @@ export default function Catalog({ products = [], visibleCount, setVisibleCount, 
                     <h2 className="font-bold text-xl text-[#2C3E50]">{product.name}</h2>
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-[#2C3E50] text-lg">€{Number(product.price).toFixed(2)}</span>
-                      <button className="ml-2">
-                        {product.favorite ? <HeartSolid className="w-6 h-6 text-red-500" /> : <HeartIcon className="w-6 h-6 text-[#6C757D]" />}
+                      <button className="ml-2" type="button" onClick={e => { e.preventDefault(); handleFavorite(product.id); }}>
+                        {favorites.includes(product.id) ? <HeartSolid className="w-6 h-6 text-red-500" /> : <HeartIcon className="w-6 h-6 text-[#6C757D]" />}
                       </button>
                     </div>
                   </div>

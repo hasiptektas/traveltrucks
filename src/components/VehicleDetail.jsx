@@ -1,10 +1,33 @@
 import React, { useState } from 'react';
 import { MapPinIcon, HeartIcon, StarIcon, Cog6ToothIcon, FireIcon, TvIcon, WrenchScrewdriverIcon, HomeIcon, RadioIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { toast } from 'react-toastify';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import trLocale from 'date-fns/locale/tr';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 export default function VehicleDetail({ camper }) {
   const [tab, setTab] = useState('features');
+  const [inputErrors, setInputErrors] = useState({ name: false, email: false, date: false });
+  const [formValues, setFormValues] = useState({ name: '', email: '', date: '', comment: '' });
+  const [selectedDate, setSelectedDate] = useState(null);
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.favorites);
   if (!camper) return null;
+
+  const handleFavorite = (id) => {
+    dispatch(toggleFavorite(id));
+    if (favorites.includes(id)) {
+      toast.info('Favorilerden çıkarıldı');
+    } else {
+      toast.success('Favorilere eklendi');
+    }
+  };
 
   // Özellikler
   const features = [
@@ -33,6 +56,48 @@ export default function VehicleDetail({ camper }) {
   // Reviews
   const reviews = camper.reviews || [];
 
+  // Form gönderim handler'ı
+  function handleBookingSubmit(e) {
+    e.preventDefault();
+    const { name, email } = formValues;
+    const date = selectedDate;
+    const errors = {
+      name: !name.trim(),
+      email: !email.trim(),
+      date: !date,
+    };
+    setInputErrors(errors);
+    if (errors.name || errors.email || errors.date) {
+      toast.error('Lütfen ad, e-posta ve rezervasyon tarihi alanlarını doldurun!');
+      return;
+    }
+    // E-posta format kontrolü
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setInputErrors(prev => ({ ...prev, email: true }));
+      toast.error('Lütfen geçerli bir e-posta adresi girin!');
+      return;
+    }
+    setInputErrors({ name: false, email: false, date: false });
+    toast.success('Rezervasyon talebiniz alınmıştır!');
+    setFormValues({ name: '', email: '', date: '', comment: '' });
+    setSelectedDate(null);
+  }
+
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
+    setInputErrors(prev => ({ ...prev, [name]: false }));
+  }
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#ef4444', // Tailwind red-500
+      },
+    },
+  });
+
   return (
     <div className="pt-28 px-8 pb-12 max-w-6xl mx-auto">
       {/* Başlık ve fiyat */}
@@ -48,7 +113,9 @@ export default function VehicleDetail({ camper }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-bold text-2xl text-[#2C3E50]">€{Number(camper.price).toFixed(2)}</span>
-          <button><HeartSolid className="w-7 h-7 text-red-500" /></button>
+          <button type="button" onClick={() => handleFavorite(camper.id)}>
+            {favorites.includes(camper.id) ? <HeartSolid className="w-7 h-7 text-red-500" /> : <HeartIcon className="w-7 h-7 text-[#6C757D]" />}
+          </button>
         </div>
       </div>
       {/* Galeri */}
@@ -96,11 +163,48 @@ export default function VehicleDetail({ camper }) {
           <div className="bg-white rounded-xl p-6 border border-[#DEE2E6]">
             <div className="font-semibold text-[#2C3E50] mb-2">Book your campervan now</div>
             <div className="text-xs text-[#6C757D] mb-4">Stay connected! We are always ready to help you.</div>
-            <form className="flex flex-col gap-3">
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Name*" />
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Email*" />
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Booking date*" />
-              <textarea className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Comment" rows={3} />
+            <form className="flex flex-col gap-3" onSubmit={handleBookingSubmit}>
+              <input
+                name="name"
+                value={formValues.name}
+                onChange={handleInputChange}
+                className={`rounded bg-[#F8F9FA] border px-3 py-2 text-sm ${inputErrors.name ? 'border-red-500 placeholder-red-400' : 'border-[#DEE2E6]'}`}
+                placeholder={inputErrors.name ? 'Boş bırakılamaz' : 'Name*'}
+              />
+              <input
+                name="email"
+                value={formValues.email}
+                onChange={handleInputChange}
+                className={`rounded bg-[#F8F9FA] border px-3 py-2 text-sm ${inputErrors.email ? 'border-red-500 placeholder-red-400' : 'border-[#DEE2E6]'}`}
+                placeholder={inputErrors.email ? (formValues.email ? 'Geçersiz e-posta' : 'Boş bırakılamaz') : 'Email*'}
+              />
+              <ThemeProvider theme={theme}>
+                <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={trLocale}>
+                  <DatePicker
+                    label="Booking date*"
+                    value={selectedDate}
+                    onChange={newValue => setSelectedDate(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        name="date"
+                        error={inputErrors.date}
+                        helperText={inputErrors.date ? 'Boş bırakılamaz' : ''}
+                        fullWidth
+                        sx={{ backgroundColor: '#F8F9FA' }}
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+              </ThemeProvider>
+              <textarea
+                name="comment"
+                value={formValues.comment}
+                onChange={handleInputChange}
+                className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm"
+                placeholder="Comment"
+                rows={3}
+              />
               <button type="submit" className="bg-red-500 hover:bg-red-600 text-white font-semibold rounded-full py-2 mt-2">Send</button>
             </form>
           </div>
@@ -130,11 +234,48 @@ export default function VehicleDetail({ camper }) {
           <div className="bg-white rounded-xl p-6 border border-[#DEE2E6] h-max">
             <div className="font-semibold text-[#2C3E50] mb-2">Book your campervan now</div>
             <div className="text-xs text-[#6C757D] mb-4">Stay connected! We are always ready to help you.</div>
-            <form className="flex flex-col gap-3">
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Name*" />
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Email*" />
-              <input className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Booking date*" />
-              <textarea className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm" placeholder="Comment" rows={3} />
+            <form className="flex flex-col gap-3" onSubmit={handleBookingSubmit}>
+              <input
+                name="name"
+                value={formValues.name}
+                onChange={handleInputChange}
+                className={`rounded bg-[#F8F9FA] border px-3 py-2 text-sm ${inputErrors.name ? 'border-red-500 placeholder-red-400' : 'border-[#DEE2E6]'}`}
+                placeholder={inputErrors.name ? 'Boş bırakılamaz' : 'Name*'}
+              />
+              <input
+                name="email"
+                value={formValues.email}
+                onChange={handleInputChange}
+                className={`rounded bg-[#F8F9FA] border px-3 py-2 text-sm ${inputErrors.email ? 'border-red-500 placeholder-red-400' : 'border-[#DEE2E6]'}`}
+                placeholder={inputErrors.email ? (formValues.email ? 'Geçersiz e-posta' : 'Boş bırakılamaz') : 'Email*'}
+              />
+              <ThemeProvider theme={theme}>
+                <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={trLocale}>
+                  <DatePicker
+                    label="Booking date*"
+                    value={selectedDate}
+                    onChange={newValue => setSelectedDate(newValue)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        name="date"
+                        error={inputErrors.date}
+                        helperText={inputErrors.date ? 'Boş bırakılamaz' : ''}
+                        fullWidth
+                        sx={{ backgroundColor: '#F8F9FA' }}
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+              </ThemeProvider>
+              <textarea
+                name="comment"
+                value={formValues.comment}
+                onChange={handleInputChange}
+                className="rounded bg-[#F8F9FA] border border-[#DEE2E6] px-3 py-2 text-sm"
+                placeholder="Comment"
+                rows={3}
+              />
               <button type="submit" className="bg-red-500 hover:bg-red-600 text-white font-semibold rounded-full py-2 mt-2">Send</button>
             </form>
           </div>

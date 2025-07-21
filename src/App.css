@@ -1,1 +1,251 @@
+/* Date picker seçili gün için kırmızı tema */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(32%) sepia(99%) saturate(7492%) hue-rotate(346deg) brightness(97%) contrast(101%);
+}
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  background-color: #fff;
+}
+input[type="date"]::-webkit-datetime-edit {
+  color: #2C3E50;
+}
+input[type="date"]:focus::-webkit-datetime-edit,
+input[type="date"]:active::-webkit-datetime-edit {
+  background: #f8d7da;
+  color: #b71c1c;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:focus {
+  outline: none;
+}
 
+/* Seçili günün arka planı (Chrome, Safari) */
+input[type="date"]::-webkit-calendar-picker-indicator:active {
+  background: #e74c3c;
+}
+
+/* Firefox için */
+input[type="date"]:focus {
+  outline: 2px solid #e74c3c;
+}
+
+/* react-datepicker seçili gün kırmızı arka plan */
+.custom-datepicker-calendar .react-datepicker__day--selected,
+.custom-datepicker-calendar .react-datepicker__day--keyboard-selected {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+}
+.custom-datepicker-calendar .react-datepicker__day--selected:hover,
+.custom-datepicker-calendar .react-datepicker__day--keyboard-selected:hover {
+  background-color: #c0392b !important;
+}
+
+/* Takvim popup başlık ve oklar kırmızı tema */
+.custom-datepicker-calendar .react-datepicker__header {
+  background-color: #e74c3c !important;
+  border-bottom: 1px solid #c0392b !important;
+}
+.custom-datepicker-calendar .react-datepicker__current-month,
+.custom-datepicker-calendar .react-datepicker__day-name {
+  color: #fff !important;
+}
+.custom-datepicker-calendar .react-datepicker__navigation--previous,
+.custom-datepicker-calendar .react-datepicker__navigation--next {
+  top: 16px;
+}
+.custom-datepicker-calendar .react-datepicker__navigation-icon::before {
+  border-color: #fff !important;
+}
+
+/* Takvim popup border ve shadow kırmızı tema */
+.custom-datepicker-calendar {
+  border: 1.5px solid #e74c3c !important;
+  box-shadow: 0 2px 8px 0 #e74c3c22 !important;
+}
+
+/* Takvim input focus kırmızı */
+.react-datepicker__input-container input:focus {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 2px #e74c3c33 !important;
+}
+
+/* --- KIRMIZI TEMA: React Datepicker --- */
+.custom-datepicker-calendar.react-datepicker-popper,
+.custom-datepicker-calendar .react-datepicker,
+.custom-datepicker-calendar .react-datepicker__header {
+  background: #e74c3c !important;
+  border: 1.5px solid #e74c3c !important;
+  box-shadow: 0 2px 8px 0 #e74c3c22 !important;
+}
+.custom-datepicker-calendar .react-datepicker__current-month,
+.custom-datepicker-calendar .react-datepicker__day-name {
+  color: #fff !important;
+}
+.custom-datepicker-calendar .react-datepicker__navigation-icon::before {
+  border-color: #fff !important;
+}
+.custom-datepicker-calendar .react-datepicker__day--selected,
+.custom-datepicker-calendar .react-datepicker__day--keyboard-selected {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+}
+.custom-datepicker-calendar .react-datepicker__day--selected:hover,
+.custom-datepicker-calendar .react-datepicker__day--keyboard-selected:hover {
+  background-color: #c0392b !important;
+}
+.custom-datepicker-calendar .react-datepicker__day:hover {
+  background: #f8d7da !important;
+  color: #e74c3c !important;
+}
+.react-datepicker__input-container input:focus {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 2px #e74c3c33 !important;
+}
+/* --- SON --- */
+
+/* --- KIRMIZI TEMA: React Datepicker (DAHA SPESİFİK) --- */
+.custom-datepicker-calendar .react-datepicker__day.react-datepicker__day--selected,
+.custom-datepicker-calendar .react-datepicker__day.react-datepicker__day--keyboard-selected {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+  border-radius: 0.3rem !important;
+}
+.custom-datepicker-calendar .react-datepicker__day.react-datepicker__day--selected:hover,
+.custom-datepicker-calendar .react-datepicker__day.react-datepicker__day--keyboard-selected:hover {
+  background-color: #c0392b !important;
+  color: #fff !important;
+}
+
+/* Seçili gün arka planı kırmızı */
+.custom-day-selected,
+.rdp-day_selected {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+  border-radius: 0.3rem !important;
+}
+.custom-day-selected:hover,
+.rdp-day_selected:hover {
+  background-color: #c0392b !important;
+  color: #fff !important;
+}
+
+/* Takvim başlığı arka planı kırmızı */
+.rdp-caption,
+.rdp-head,
+.react-day-picker-caption,
+.react-day-picker-head {
+  background: #e74c3c !important;
+}
+.rdp-caption_label,
+.rdp-head th,
+.react-day-picker-caption > div,
+.react-day-picker-head th {
+  color: #fff !important;
+}
+
+/* Ok işaretleri kırmızı */
+.rdp-nav_button,
+.react-day-picker-nav-button {
+  color: #e74c3c !important;
+  fill: #e74c3c !important;
+}
+.rdp-nav_button:hover,
+.react-day-picker-nav-button:hover {
+  color: #c0392b !important;
+  fill: #c0392b !important;
+}
+.rdp-nav_button svg path,
+.react-day-picker-nav-button svg path {
+  stroke: #e74c3c !important;
+}
+.rdp-nav_button:hover svg path,
+.react-day-picker-nav-button:hover svg path {
+  stroke: #c0392b !important;
+}
+/* --- SON --- */
+
+/* --- react-day-picker v8+ için kırmızı tema --- */
+.rdp-day_selected, .rdp-day_selected:focus-visible, .rdp-day_selected:active {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+  border-radius: 0.3rem !important;
+  border: none !important;
+}
+.rdp-day_selected:hover {
+  background-color: #c0392b !important;
+  color: #fff !important;
+}
+
+.rdp-caption {
+  background: #e74c3c !important;
+}
+.rdp-caption_label {
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+.rdp-head {
+  background: #e74c3c !important;
+}
+.rdp-head th {
+  color: #fff !important;
+}
+
+.rdp-nav_button {
+  color: #e74c3c !important;
+  fill: #e74c3c !important;
+  background: transparent !important;
+  border: none !important;
+}
+.rdp-nav_button:hover {
+  color: #c0392b !important;
+  fill: #c0392b !important;
+}
+.rdp-nav_button svg {
+  stroke: #e74c3c !important;
+}
+.rdp-nav_button:hover svg {
+  stroke: #c0392b !important;
+}
+
+/* Seçili gün arka planı kırmızı (rdp-day ve selected) */
+.rdp-day.selected,
+.rdp-day.selected:focus-visible,
+.rdp-day.selected:active {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+  border-radius: 0.3rem !important;
+  border: none !important;
+}
+.rdp-day.selected:hover {
+  background-color: #c0392b !important;
+  color: #fff !important;
+}
+
+/* Ok işaretleri kırmızı (rdp-chevron) */
+.rdp-chevron {
+  color: #e74c3c !important;
+  fill: #e74c3c !important;
+  stroke: #e74c3c !important;
+}
+.rdp-chevron:hover {
+  color: #c0392b !important;
+  fill: #c0392b !important;
+  stroke: #c0392b !important;
+}
+
+/* Takvim popup'ındaki kırmızı çerçeveyi kaldır */
+.DayPicker,
+.rdp,
+.rdp .rdp-month,
+.rdp .rdp-months,
+.rdp .rdp-months > div,
+.rdp .rdp-month > div {
+  border: none !important;
+  box-shadow: none !important;
+}
+.rdp,
+.rdp .rdp-month,
+.rdp .rdp-months,
+.rdp .rdp-months > div,
+.rdp .rdp-month > div {
+  border-color: transparent !important;
+}
