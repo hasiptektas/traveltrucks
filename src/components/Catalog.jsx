@@ -106,9 +106,7 @@ export default function Catalog({ products = [], visibleCount, setVisibleCount, 
                     <h2 className="font-bold text-xl text-[#2C3E50]">{product.name}</h2>
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-[#2C3E50] text-lg">€{Number(product.price).toFixed(2)}</span>
-                      <button className="ml-2" type="button" onClick={e => { e.preventDefault(); handleFavorite(product.id); }}>
-                        {favorites.includes(product.id) ? <HeartSolid className="w-6 h-6 text-red-500" /> : <HeartIcon className="w-6 h-6 text-[#6C757D]" />}
-                      </button>
+                      {favorites.includes(product.id) ? <HeartSolid className="w-6 h-6 text-red-500" /> : <HeartIcon className="w-6 h-6 text-[#6C757D]" />}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-[#4A69BD]">
@@ -123,7 +121,17 @@ export default function Catalog({ products = [], visibleCount, setVisibleCount, 
                     {product.TV && <span className="flex items-center gap-1 bg-[#F8F9FA] border border-[#DEE2E6] rounded px-2 py-1 text-xs text-[#2C3E50]"><TvIcon className="w-4 h-4" />TV</span>}
                     {product.bathroom && <span className="flex items-center gap-1 bg-[#F8F9FA] border border-[#DEE2E6] rounded px-2 py-1 text-xs text-[#2C3E50]"><HomeIcon className="w-4 h-4" />Bathroom</span>}
                   </div>
-                  <button className="bg-red-500 hover:bg-red-600 text-white text-sm px-5 py-2 rounded-full font-semibold w-max">Show more</button>
+                  <div className="flex gap-2 mt-2">
+                    <button className="bg-red-500 hover:bg-red-600 text-white text-sm px-5 py-2 rounded-full font-semibold w-max">Show more</button>
+                    <button
+                      className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-colors ${favorites.includes(product.id) ? 'bg-red-50 border-red-500 text-red-500 hover:bg-red-100' : 'bg-white border-[#DEE2E6] text-[#2C3E50] hover:bg-[#F8F9FA]'}`}
+                      type="button"
+                      onClick={e => { e.preventDefault(); handleFavorite(product.id); }}
+                    >
+                      {favorites.includes(product.id) ? <HeartSolid className="w-5 h-5" /> : <HeartIcon className="w-5 h-5" />}
+                      {favorites.includes(product.id) ? 'Favorilerden çıkar' : 'Favorilere ekle'}
+                    </button>
+                  </div>
                 </div>
               </div>
             </Link>
